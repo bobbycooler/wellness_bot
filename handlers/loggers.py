@@ -97,7 +97,7 @@ async def log_workout(message, command, state):
     water_goal += required_water
     await state.update_data(water_goal=water_goal)
 
-    await message.answer(f"{activity_type} {activity_time} минут - {burned_calories} ккал. "
+    await message.answer(f"{activity_type.capitalize()} {activity_time} минут - {burned_calories} ккал. "
                          f"Дополнительно: выпейте {required_water} мл воды.")
 
 
@@ -121,8 +121,10 @@ async def check_progress(message, state):
                          f"- Сожжено: {sum(calorie_burn_current):.2f} ккал.\n"
                          f"- Баланс: {(sum(calorie_eat_current) - sum(calorie_burn_current)):.2f} ккал.")
 
+    indices = range(1, len(water_current) + 1)
+    
     plt.figure(figsize=(8, 4))
-    plt.plot(water_current, marker='o', linestyle='-', color='green')
+    plt.plot(indices, water_current, marker='o', linestyle='-', color='green')
     plt.axhline(y=water_goal, color='red', linestyle='--', label=f'Цель ({water_goal} мл)')
     ax = plt.gca()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
