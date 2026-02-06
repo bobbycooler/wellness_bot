@@ -124,7 +124,7 @@ async def check_progress(message, state):
     indices = range(1, len(water_current) + 1)
     
     plt.figure(figsize=(8, 4))
-    plt.plot(indices, water_current, marker='o', linestyle='-', color='green')
+    plt.plot(indices, water_current, marker='o', linestyle='-', color='green', label='Выпито, мл')
     plt.axhline(y=water_goal, color='red', linestyle='--', label=f'Цель ({water_goal} мл)')
     ax = plt.gca()
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
@@ -132,6 +132,7 @@ async def check_progress(message, state):
     plt.xlabel("Ваши записи")
     plt.ylabel("Мл")
     plt.grid(True)
+    plt.legend()
 
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
